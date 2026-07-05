@@ -1,20 +1,20 @@
 import { NextResponse } from "next/server";
 import { GoogleGenAI } from "@google/genai";
 
-const apiKey = process.env.GEMINI_API_KEY;
-
-const ai = new GoogleGenAI({
-  apiKey: apiKey,
-});
-
 export async function POST(request: Request) {
   try {
+    const apiKey = process.env.GEMINI_API_KEY;
+
     if (!apiKey) {
       return NextResponse.json(
         { detail: "Server misconfiguration: API key is missing" },
         { status: 500 }
       );
     }
+
+    const ai = new GoogleGenAI({
+      apiKey: apiKey,
+    });
 
     const formData = await request.formData();
     const file = formData.get("file") as File | null;
