@@ -22,7 +22,7 @@ function generateId(): string {
 export function useOCR() {
   const [records, setRecords] = useState<CCCDRecord[]>([]);
   const [isProcessing, setIsProcessing] = useState(false);
-  const processingQueue = useRef<CCCDRecord[]>([]);
+  const processingQueue = useRef<(CCCDRecord & { _file?: File })[]>([]);
   const activeCount = useRef(0);
 
   /** Compute statistics from current records */

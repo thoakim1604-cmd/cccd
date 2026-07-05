@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useState } from "react";
-import { useDropzone } from "react-dropzone";
+import { useDropzone, type FileRejection } from "react-dropzone";
 import { Upload, ImagePlus, X, FileImage } from "lucide-react";
 import { toast } from "sonner";
 import Image from "next/image";
@@ -34,7 +34,7 @@ export function UploadZone({ onFilesAccepted, isProcessing }: UploadZoneProps) {
   >([]);
 
   const onDrop = useCallback(
-    (acceptedFiles: File[], rejectedFiles: { file: File; errors: { message: string }[] }[]) => {
+    (acceptedFiles: File[], rejectedFiles: FileRejection[]) => {
       // Show errors for rejected files
       rejectedFiles.forEach(({ file, errors }) => {
         const messages = errors.map((e) => e.message).join(", ");
